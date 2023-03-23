@@ -1,15 +1,12 @@
-from typing import Literal, Any, List
 import sqlite3
 import os
-
-Weekday = Literal["mandag", "tirsdag", "onsdag", "torsdag", "fredag", "lørdag", "søndag"]
 
 
 class TogDatabase:
     def __init__(self, database: str):
         self.database = sqlite3.connect(database)
 
-    def list_routes_by_day_and_station(self, day: Weekday, station: str):
+    def list_routes_by_day_and_station(self, day: str, station: str):
         return self.execute_sql_file("routes_by_day_and_station.sql", [day, station])
 
     def add_customer(self, name: str, email: str, phone: str):
@@ -18,11 +15,16 @@ class TogDatabase:
     def list_customers(self):
         return self.execute_sql_file("list_customers.sql", [])
 
+    def delete_database(self):
+        self.execute_sql_script("delete_togdb_tables.sql")
+
     def reset_database(self):
+        self.delete_database()
+
         self.execute_sql_script("init_togdb_tables.sql")
         self.execute_sql_script("init_togdb_data.sql")
 
-    def execute_sql_file(self, query_file: str, args: List[Any], commit=True):
+    def execute_sql_file(self, query_file: str, args: list, commit=True):
         with open(os.path.join("sql_queries", query_file), "r", encoding="utf-8") as fr:
             query = fr.read()
 

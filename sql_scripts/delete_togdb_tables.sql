@@ -1,0 +1,18 @@
+DROP TABLE Banestrekning;
+DROP TABLE Jernbanestasjon;
+DROP TABLE Delstrekning;
+DROP TABLE Operatør;
+DROP TABLE Togrute;
+DROP TABLE TogrutePåDag;
+DROP TABLE Rutestopp;
+DROP TABLE Vogn ;
+DROP TABLE Sittevogn ;
+DROP TABLE Sovevogn;
+DROP TABLE VognPåRute;
+DROP TABLE PassasjerPlass;
+DROP TABLE Seng;
+DROP TABLE Sete;
+DROP TABLE Togruteforekomst;
+DROP TABLE Kunde;
+DROP TABLE KundeOrdre;
+DROP TABLE Billett;
