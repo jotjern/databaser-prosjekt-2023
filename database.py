@@ -19,7 +19,5 @@ class TogDatabase:
         with open(os.path.join("queries", query_file), "r", encoding="utf-8") as fr:
             query = fr.read()
 
-        print(args)
-
         return self.database.execute(query, args).fetchall()
 
