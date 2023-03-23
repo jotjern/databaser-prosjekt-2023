@@ -6,6 +6,11 @@ class TogDatabase:
     def __init__(self, database: str):
         self.database = sqlite3.connect(database)
 
+    def is_initialized(self):
+        return len(self.database.execute(
+            "SELECT name FROM sqlite_master WHERE type='table' AND name = 'Jernbanestasjon';"
+        ).fetchall()) == 1
+
     def list_routes_by_day_and_station(self, day: str, station: str):
         return self.execute_sql_file("routes_by_day_and_station.sql", [day, station])
 
@@ -19,7 +24,8 @@ class TogDatabase:
         self.execute_sql_script("delete_togdb_tables.sql")
 
     def reset_database(self):
-        self.delete_database()
+        if self.is_initialized():
+            self.delete_database()
 
         self.execute_sql_script("init_togdb_tables.sql")
         self.execute_sql_script("init_togdb_data.sql")

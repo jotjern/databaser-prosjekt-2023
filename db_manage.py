@@ -6,9 +6,12 @@ from database import TogDatabase
 if __name__ == "__main__":
     db = TogDatabase("database.db")
 
+    if not db.is_initialized():
+        db.reset_database()
+
     while True:
         cmd = input("Skriv kommando: ")
-        if cmd == "setup" or cmd == "reset":
+        if cmd == "reset":
             db.reset_database()
             print("Initialiserte databasen")
         elif cmd == "kunder":
@@ -28,7 +31,7 @@ if __name__ == "__main__":
                 print("Avbrutt")
         elif cmd == "hjelp":
             print("Kommandoer:")
-            print("setup: Initialiserer databasen")
+            print("reset: Resetter databasen")
             print("kunder: Viser alle kunder")
             print("hjelp: Viser denne hjelpen")
             print("exit: Avslutter programmet")
