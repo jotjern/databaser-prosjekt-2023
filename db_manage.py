@@ -29,6 +29,13 @@ if __name__ == "__main__":
                 print("Kunde lagt til")
             else:
                 print("Avbrutt")
+        elif cmd == "finn ruter":
+            day = input("Dag: ")
+            station = input("Stasjon: ")
+            print(f"=== Ruter på {day} fra {station} ==========================")
+            for id_, from_, to_, day_, time_ in db.list_routes_by_day_and_station(day, station):
+                print(f"{id_}\t| {from_}\t| {to_}\t| {day_}\t| {time_}")
+            print("============================================================")
         elif cmd == "hjelp":
             print("Kommandoer:")
             print("reset: Resetter databasen")
