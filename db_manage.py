@@ -12,10 +12,20 @@ if __name__ == "__main__":
             db.reset_database()
             print("Initialiserte databasen")
         elif cmd == "kunder":
-            print("=== Kunder ===")
+            print("=== Kunder =================================================")
+
             for id_, name, email, phone in db.list_customers():
-                print(f"{id_}\t{name}\t({email}\t{phone})")
-            print("==============")
+                print(f"{id_}\t| {name}\t| {email}\t| {phone}")
+            print("============================================================")
+        elif cmd == "ny kunde":
+            name = input("Navn: ")
+            email = input("Epost: ")
+            phone = input("Telefon: ")
+            if name and email and phone:
+                db.add_customer(name, email, phone)
+                print("Kunde lagt til")
+            else:
+                print("Avbrutt")
         elif cmd == "hjelp":
             print("Kommandoer:")
             print("setup: Initialiserer databasen")
