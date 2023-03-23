@@ -145,7 +145,7 @@ CREATE TABLE Togruteforekomst(
 );
 
 CREATE TABLE Kunde(
-    KundeNr INTEGER PRIMARY KEY,
+    KundeNr INTEGER PRIMARY KEY AUTOINCREMENT,
     Navn TEXT,
     Epost TEXT,
     TlfNr TEXT
