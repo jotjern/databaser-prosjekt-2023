@@ -15,9 +15,26 @@ class TogDatabase:
     def add_customer(self, name: str, email: str, phone: str):
         return self.execute_sql_file("add_new_customer.sql", [name, email, phone])
 
-    def execute_sql_file(self, query_file: str, args: List[Any]):
-        with open(os.path.join("queries", query_file), "r", encoding="utf-8") as fr:
+    def list_customers(self):
+        return self.execute_sql_file("list_customers.sql", [])
+
+    def reset_database(self):
+        self.execute_sql_script("init_togdb_tables.sql")
+        self.execute_sql_script("init_togdb_data.sql")
+
+    def execute_sql_file(self, query_file: str, args: List[Any], commit=True):
+        with open(os.path.join("sql_queries", query_file), "r", encoding="utf-8") as fr:
             query = fr.read()
 
-        return self.database.execute(query, args).fetchall()
+        results = self.database.execute(query, args).fetchall()
+        if commit:
+            self.database.commit()
+        return results
 
+    def execute_sql_script(self, script_file: str, commit=True):
+        with open(os.path.join("sql_scripts", script_file), "r", encoding="utf-8") as fr:
+            query = fr.read()
+
+        self.database.executescript(query)
+        if commit:
+            self.database.commit()
