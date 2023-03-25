@@ -1,5 +1,6 @@
 import sqlite3
 import os
+import datetime
 
 
 class TogDatabase:
@@ -19,6 +20,26 @@ class TogDatabase:
 
     def list_customers(self):
         return self.execute_sql_file("list_customers.sql", [])
+
+    def find_trip(self, start_station: str, end_station: str, date: str, time: str):
+        weekdays = ["mandag", "tirsdag", "onsdag",
+                    "torsdag", "fredag", "lørdag", "søndag"]
+        date1 = datetime.date.fromisoformat(date)
+        date2 = date1 + datetime.timedelta(days=1)
+        day1_nr = date1.weekday()
+        day2_nr = date2.weekday()
+        day1 = weekdays[day1_nr]
+        day2 = weekdays[day2_nr]
+        #time = datetime.time.fromisoformat(time)
+        trips1_all = self.execute_sql_file(
+            "trip.sql", [day1, start_station, end_station])
+        trips1 = []
+        for t in trips1_all:
+            if t[-1] >= time:
+                trips1.append(t)
+        trips2 = self.execute_sql_file(
+            "trip.sql", [day2, start_station, end_station])
+        return trips1, trips2
 
     def delete_database(self):
         self.execute_sql_script("delete_togdb_tables.sql")
