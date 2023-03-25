@@ -43,16 +43,16 @@ if __name__ == "__main__":
             date = input("Dato (YYYY-MM-DD): ")
             time = input("Tidspunkt (HH:MM): ")
             if start_station and end_station and date and time:
-                date1 = datetime.date.fromisoformat(date)
-                date2 = date1 + datetime.timedelta(days=1)
-                trips1, trips2 = db.find_trip(start_station, end_station, date, time)
-                print(f"==== Reiser {date1.isoformat()} ====================")
-                for trip in trips1:
+                day_1_date = datetime.date.fromisoformat(date)
+                day_2_date = day_1_date + datetime.timedelta(days=1)
+                trips_day_1, trips_day_2 = db.find_trip(start_station, end_station, date, time)
+                print(f"==== Reiser {day_1_date.isoformat()} ====================")
+                for trip in trips_day_1:
                     print(
                         f"RuteID: {trip['TogruteID']}, Fra {trip['StartNavn']} "
                         f"Til {trip['StoppNavn']}, Avreise kl {trip['Tid']}")
-                print(f"==== Reiser {date2.isoformat()} ====================")
-                for trip in trips2:
+                print(f"==== Reiser {day_2_date.isoformat()} ====================")
+                for trip in trips_day_2:
                     print(
                         f"RuteID: {trip['TogruteID']}, Fra {trip['StartNavn']} "
                         f"Til {trip['StoppNavn']}, Avreise kl {trip['Tid']}")
