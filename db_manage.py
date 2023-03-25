@@ -18,8 +18,8 @@ if __name__ == "__main__":
         elif cmd == "kunder":
             print("=== Kunder =================================================")
 
-            for id_, name, email, phone in db.list_customers():
-                print(f"{id_}\t| {name}\t| {email}\t| {phone}")
+            for customer in db.list_customers():
+                print(f"{customer['KundeNr']}\t| {customer['Navn']}\t| {customer['Epost']}\t| {customer['Telefon']}")
             print("============================================================")
         elif cmd == "ny kunde":
             name = input("Navn: ")
@@ -34,8 +34,8 @@ if __name__ == "__main__":
             day = input("Dag: ")
             station = input("Stasjon: ")
             print(f"=== Ruter på {day} fra {station} ==========================")
-            for id_, from_, to_, day_, time_ in db.list_routes_by_day_and_station(day, station):
-                print(f"{id_}\t| {from_}\t| {to_}\t| {day_}\t| {time_}")
+            for route in db.list_routes_by_day_and_station(day, station):
+                print(f"{route['TogruteID']}\t| {route['OperatørNavn']}")
             print("============================================================")
         elif cmd == "finn reise":
             start_station = input("Startstasjon: ")
@@ -45,18 +45,17 @@ if __name__ == "__main__":
             if start_station and end_station and date and time:
                 date1 = datetime.date.fromisoformat(date)
                 date2 = date1 + datetime.timedelta(days=1)
-                trips1, trips2 = db.find_trip(
-                    start_station, end_station, date, time)
-                print("==== Reiser " + date1.isoformat() +
-                      " ====================")
-                for t in trips1:
+                trips1, trips2 = db.find_trip(start_station, end_station, date, time)
+                print(f"==== Reiser {date1.isoformat()} ====================")
+                for trip in trips1:
                     print(
-                        f"RuteID: {t[0]}, Fra {t[1]} Til {t[2]}, Avreise kl {t[3]}")
-                print("==== Reiser " + date2.isoformat() +
-                      " ====================")
-                for t in trips2:
+                        f"RuteID: {trip['TogruteID']}, Fra {trip['StartNavn']} "
+                        f"Til {trip['StoppNavn']}, Avreise kl {trip['Tid']}")
+                print(f"==== Reiser {date2.isoformat()} ====================")
+                for trip in trips2:
                     print(
-                        f"RuteID: {t[0]}, Fra {t[1]} Til {t[2]}, Avreise kl {t[3]}")
+                        f"RuteID: {trip['TogruteID']}, Fra {trip['StartNavn']} "
+                        f"Til {trip['StoppNavn']}, Avreise kl {trip['Tid']}")
             else:
                 print("Avbrutt")
         elif cmd == "hjelp":
