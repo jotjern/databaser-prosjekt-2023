@@ -54,7 +54,7 @@ if __name__ == "__main__":
                         f"RuteID: {t[0]}, Fra {t[1]} Til {t[2]}, Avreise kl {t[3]}")
                 print("==== Reiser " + date2.isoformat() +
                       " ====================")
-                for t in trips1:
+                for t in trips2:
                     print(
                         f"RuteID: {t[0]}, Fra {t[1]} Til {t[2]}, Avreise kl {t[3]}")
             else:
