@@ -69,12 +69,6 @@ INSERT INTO Vogn (VognNavn, OperatørNavn) VALUES
     ('SJ-sittevogn-1', 'SJ'),
     ('SJ-sovevogn-1', 'SJ');
 
-INSERT INTO Sittevogn (VognNavn, AntallRader, SeterPerRad) VALUES
-    ('SJ-sittevogn-1', 3, 4);
-
-INSERT INTO Sovevogn (VognNavn, AntallKupéer, SengerPerKupé) VALUES
-    ('SJ-sovevogn-1', 4, 2);
-
 INSERT INTO VognPåRute (TogruteID, VognNavn, VognNr) VALUES
     (0, 'SJ-sittevogn-1',  1),
     (0, 'SJ-sittevogn-1',  2),
@@ -84,28 +78,24 @@ INSERT INTO VognPåRute (TogruteID, VognNavn, VognNr) VALUES
 
     (2, 'SJ-sittevogn-1',  1);
 
-INSERT INTO Sete (VognNavn, PlassNr) VALUES
-    ('SJ-sittevogn-1', 1),
-    ('SJ-sittevogn-1', 2),
-    ('SJ-sittevogn-1', 3),
-    ('SJ-sittevogn-1', 4),
-    ('SJ-sittevogn-1', 5),
-    ('SJ-sittevogn-1', 6),
-    ('SJ-sittevogn-1', 7),
-    ('SJ-sittevogn-1', 8),
-    ('SJ-sittevogn-1', 9),
-    ('SJ-sittevogn-1', 10),
-    ('SJ-sittevogn-1', 11),
-    ('SJ-sittevogn-1', 12);
-
-INSERT INTO Seng (VognNavn, PlassNr) VALUES
-    ('SJ-sovevogn-1', 1),
-    ('SJ-sovevogn-1', 2),
-    ('SJ-sovevogn-1', 3),
-    ('SJ-sovevogn-1', 4),
-    ('SJ-sovevogn-1', 5),
-    ('SJ-sovevogn-1', 6),
-    ('SJ-sovevogn-1', 7),
-    ('SJ-sovevogn-1', 8);
-
-
+INSERT INTO PassasjerPlass (VognNavn, PlassNr, Type, Inndeling) VALUES
+    ('SJ-sittevogn-1', 1, 'Sete', 1),
+    ('SJ-sittevogn-1', 2, 'Sete', 1),
+    ('SJ-sittevogn-1', 3, 'Sete', 1),
+    ('SJ-sittevogn-1', 4, 'Sete', 1),
+    ('SJ-sittevogn-1', 5, 'Sete', 2),
+    ('SJ-sittevogn-1', 6, 'Sete', 2),
+    ('SJ-sittevogn-1', 7, 'Sete', 2),
+    ('SJ-sittevogn-1', 8, 'Sete', 2),
+    ('SJ-sittevogn-1', 9, 'Sete', 3),
+    ('SJ-sittevogn-1', 10, 'Sete', 3),
+    ('SJ-sittevogn-1', 11, 'Sete', 3),
+    ('SJ-sittevogn-1', 12, 'Sete', 3),
+    ('SJ-sovevogn-1', 1, 'Seng', 1),
+    ('SJ-sovevogn-1', 2, 'Seng', 1),
+    ('SJ-sovevogn-1', 3, 'Seng', 2),
+    ('SJ-sovevogn-1', 4, 'Seng', 2),
+    ('SJ-sovevogn-1', 5, 'Seng', 3),
+    ('SJ-sovevogn-1', 6, 'Seng', 3),
+    ('SJ-sovevogn-1', 7, 'Seng', 4),
+    ('SJ-sovevogn-1', 8, 'Seng', 4);

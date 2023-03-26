@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE Banestrekning(
     Navn TEXT PRIMARY KEY,
     Fremdriftsenergi TEXT
@@ -71,26 +73,6 @@ CREATE TABLE Vogn (
         ON DELETE CASCADE
 );
 
-CREATE TABLE Sittevogn (
-    VognNavn TEXT PRIMARY KEY,
-    AntallRader INTEGER,
-    SeterPerRad INTEGER,
-    FOREIGN KEY (VognNavn) REFERENCES Vogn (VognNavn)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-
-CREATE TABLE Sovevogn(
-    VognNavn TEXT PRIMARY KEY,
-    AntallKupéer INTEGER,
-    SengerPerKupé INTEGER,
-    FOREIGN KEY (VognNavn) REFERENCES Vogn (VognNavn)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-
 CREATE TABLE VognPåRute(
     TogruteID INTEGER NOT NULL,
     VognNavn TEXT NOT NULL,
@@ -107,30 +89,10 @@ CREATE TABLE VognPåRute(
 CREATE TABLE PassasjerPlass(
     VognNavn TEXT NOT NULL,
     PlassNr INTEGER NOT NULL,
-    PRIMARY KEY (VognNavn, PlassNr)
-);
-
-CREATE TABLE Seng(
-    VognNavn TEXT NOT NULL,
-    PlassNr INTEGER NOT NULL,
+    Inndeling INTEGER,
+    Type TEXT NOT NULL,
     PRIMARY KEY (VognNavn, PlassNr),
-    FOREIGN KEY (VognNavn) REFERENCES Sovevogn (VognNavn)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (VognNavn, PlassNr) REFERENCES PassasjerPlass (VognNavn, PlassNr)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-
-CREATE TABLE Sete(
-    VognNavn TEXT NOT NULL,
-    PlassNr INTEGER NOT NULL,
-    PRIMARY KEY (VognNavn, PlassNr),
-    FOREIGN KEY (VognNavn) REFERENCES Sittevogn (VognNavn)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (VognNavn, PlassNr) REFERENCES PassasjerPlass (VognNavn, PlassNr)
+    FOREIGN KEY (VognNavn) REFERENCES Vogn (VognNavn)
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -152,9 +114,9 @@ CREATE TABLE Kunde(
 );
 
 CREATE TABLE KundeOrdre(
-    OrdreNr INTEGER PRIMARY KEY,
-    Dato TEXT,
-    Tidspunkt TEXT,
+    OrdreNr INTEGER PRIMARY KEY AUTOINCREMENT,
+    KjopDato TEXT,
+    KjopTidspunkt TEXT,
     KundeNr INTEGER NOT NULL,
     FOREIGN KEY (KundeNr) REFERENCES Kunde (KundeNr)
         ON UPDATE CASCADE
@@ -164,16 +126,13 @@ CREATE TABLE KundeOrdre(
 CREATE TABLE Billett(
     TogruteID INTEGER NOT NULL,
     Dato TEXT NOT NULL,
-    VognNavn TEXT NOT NULL,
     PlassNr INTEGER NOT NULL,
+    VognNr INTEGER NOT NULL,
     FraStasjon TEXT NOT NULL,
     TilStasjon TEXT NOT NULL,
     OrdreNr INTEGER NOT NULL,
-    PRIMARY KEY (TogruteID, Dato, VognNavn, PlassNr, FraStasjon, TilStasjon),
+    PRIMARY KEY (TogruteID, Dato, VognNr, PlassNr, FraStasjon, TilStasjon),
     FOREIGN KEY (TogruteID, Dato) REFERENCES Togruteforekomst (TogruteID, Dato)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE,
-    FOREIGN KEY (VognNavn, PlassNr) REFERENCES PassasjerPlass (VognNavn, PlassNr)
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     FOREIGN KEY (FraStasjon) REFERENCES Jernbanestasjon (Navn)

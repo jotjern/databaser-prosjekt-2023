@@ -1,0 +1,1 @@
+SELECT * FROM Kunde WHERE Navn = ?1;
