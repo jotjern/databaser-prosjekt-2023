@@ -1,15 +1,16 @@
-# Databaser prosjekt
+# Datamodellering og databasesystemer
 
 For å bruke applikasjonen kjører du `__main__.py` eller alternativt kan man teste funksjonene
-med unittestene i `tests.py`.
+med unittestene i `tests.py`. `__main__.py` bruker `TogDatabase` klassen som laster inn og kjører
+SQL-filer fra mappene `sql_queries` og `sql_scripts`.
 
 * a) Databasen skal kunne registrere data om alle jernbanestrekninger i Norge. Dere skal legge inn
-data for Nordlandsbanen (som vist i figuren). Dette kan gjøres med et skript, dere trenger ikke å
-programmere støtte for denne funksjonaliteten.
+  data for Nordlandsbanen (som vist i figuren). Dette kan gjøres med et skript, dere trenger ikke å
+  programmere støtte for denne funksjonaliteten.
 
 * b) Dere skal kunne registrere data om togruter. Dere skal legge inn data for de tre togrutene på
-Nordlandsbanen som er beskrevet i vedlegget til denne oppgave. Dette kan gjøres med et skript,
-dere trenger ikke å programmere støtte for denne funksjonaliteten.
+  Nordlandsbanen som er beskrevet i vedlegget til denne oppgave. Dette kan gjøres med et skript,
+  dere trenger ikke å programmere støtte for denne funksjonaliteten.
 
 
 Applikasjonen bruker SQL-skriptene
@@ -19,7 +20,7 @@ Dette gjøres automatisk når applikasjonen kjøres.
 
 
 * c) For en stasjon som oppgis, skal bruker få ut alle togruter som er innom stasjonen en gitt ukedag.
-Denne funksjonaliteten skal programmeres.
+  Denne funksjonaliteten skal programmeres.
 
 Kommandoen `finn ruter` implementerer dette:
 ```
@@ -34,8 +35,8 @@ Skriv kommando:
 ```
 
 * d) Bruker skal kunne søke etter togruter som går mellom en startstasjon og en sluttstasjon, med
-utgangspunkt i en dato og et klokkeslett. Alle ruter den samme dagen og den neste skal
-returneres, sortert på tid. Denne funksjonaliteten skal programmeres.
+  utgangspunkt i en dato og et klokkeslett. Alle ruter den samme dagen og den neste skal
+  returneres, sortert på tid. Denne funksjonaliteten skal programmeres.
 
 
 Kommandoen `finn reise`:
@@ -67,17 +68,17 @@ Skriv kommando:
 ```
 
 * f) Det skal legges inn nødvendige data slik at systemet kan håndtere billettkjøp for de tre togrutene
-på Nordlandsbanen, mandag 3. april og tirsdag 4. april i år. Dette kan gjøres med et skript, dere
-trenger ikke å programmere støtte for denne funksjonaliteten.
+  på Nordlandsbanen, mandag 3. april og tirsdag 4. april i år. Dette kan gjøres med et skript, dere
+  trenger ikke å programmere støtte for denne funksjonaliteten.
 
 I `reset_database` funksjonen på `Database` klassen kalles funksjonen `generate_route_instances` som lager
 Togruteforekomst-er. Denne kjøres altså automatisk når applikasjonen kjøres.
 
 
 * g) Registrerte kunder skal kunne finne ledige billetter for en oppgitt strekning på en ønsket togrute
-og kjøpe de billettene hen ønsker. Denne funksjonaliteten skal programmeres.
+  og kjøpe de billettene hen ønsker. Denne funksjonaliteten skal programmeres.
 
-    Pass på at dere bare selger ledige plasser
+  Pass på at dere bare selger ledige plasser
 
 Kommandoen `kjøp billett` implementerer dette, her bruker vi rute #1 fra Trondheim til Steinkjer som vi
 fant tidligere og kjøper den på vegne av `Ola Nordmann`-brukeren vi registrerte tidligere:
@@ -111,7 +112,7 @@ Skriv kommando:
 ```
 
 * h) For en bruker skal man kunne finne all informasjon om de kjøpene hen har gjort for fremtidige
-reiser. Denne funksjonaliteten skal programmeres.
+  reiser. Denne funksjonaliteten skal programmeres.
 
 Kommandoen `se kjøp`:
 
@@ -125,10 +126,10 @@ Skriv kommando:
 ```
 
 Legg merke til at hvis denne koden kjøres etter 4. April vil den ikke lenger
-vise dette kjøpet fordi det vil være i fortiden. 
+vise dette kjøpet fordi det vil være i fortiden.
 
 
-**NB**: Vi har gjort noen endringer i databasen siden forrige endring fordi det
+**NB**: Vi har gjort noen endringer i databasen siden forrige versjon fordi det
 viste seg å gjøre implementasjonen i kode ryddigere og mer intuitiv.
 Seng og Sete har blitt slått sammen til PassasjerPlass med et felt for type plass.
 I tillegg har Sovevogn og Sittevogn blitt del av Vogn. PassasjerPlass lagrer hvilken
